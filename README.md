@@ -1,0 +1,2 @@
+# RotinasOtim
+Rotinas para otimização 
