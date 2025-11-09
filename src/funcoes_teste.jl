@@ -50,3 +50,13 @@ function HRosenbrook(x)
      H21 H22]
 end
 
+#
+# Função apostila
+#
+function apostila(x) 
+     exp(x) -4*x +2
+end
+
+function dapostila(x) 
+     exp(x) -4
+end
