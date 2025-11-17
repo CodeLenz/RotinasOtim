@@ -228,6 +228,40 @@ function LineSearch_NR_constr(x::Vector, d::Vector, f::Function, α_lim=0.0; tol
         # Por hora, sem isso
         δ = 1.0
  
+        # Bloqueio (ver quantas interações)
+        for i in 1:20
+
+            α_ = α + δ*Δα
+            s_ = s + δ*Δs
+            λ_ = λ + δ*Δλ
+
+            condi1 = false
+            condi2 = false 
+            condi3 = false
+
+            if (α_ > α_min) && (α_ <= α_lim)
+                condi1 = true
+            end
+
+            # ver se ta bom o numero
+            if (s_>1E-12)
+                condi2 = true
+            end
+            
+            # ver se ta bom o numero
+            if (λ_ > 1E-12)
+                condi3 = true
+            end
+
+            if condi1 && condi2 && condi3
+               break
+            end
+
+            # Backtracking - notas de aula
+            δ *= 0.5
+
+        end
+        
         # Agora podemos atualizar os valores
         α += δ*Δα
         s += δ*Δs
